@@ -1,7 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-krakow:
-  name: Krakow
-  external_id: KR
-  secret_code: "1b3d78d7-d375-4998-84b4-b17c54018662"
-
