@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_171737) do
+ActiveRecord::Schema.define(version: 2019_01_23_183216) do
 
   create_table "countries", force: :cascade do |t|
     t.string "code", null: false
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 2019_01_22_171737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_panel_providers_on_code", unique: true
+  end
+
+  create_table "target_groups", force: :cascade do |t|
+    t.string "name"
+    t.string "external_id"
+    t.integer "parent_id"
+    t.string "secret_code"
+    t.integer "panel_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["panel_provider_id"], name: "index_target_groups_on_panel_provider_id"
+    t.index ["parent_id"], name: "index_target_groups_on_parent_id"
   end
 
 end
