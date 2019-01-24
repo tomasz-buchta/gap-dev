@@ -7,5 +7,4 @@ class Country < ApplicationRecord
   has_many :target_groups, through: :countries_target_groups
 
   validates :code, presence: true, uniqueness: true
-  validates :panel_provider, presence: true
 end
