@@ -3,7 +3,11 @@ FactoryBot.define do
     name { "MyString" }
     external_id { "MyString" }
     parent { nil }
-    secret_code { "MyString" }
-    panel_provider { nil }
+    sequence(:secret_code) { |n| "code-#{n}" }
+    panel_provider
+
+    trait :with_parent do
+      association :parent, factory: :target_group
+    end
   end
 end

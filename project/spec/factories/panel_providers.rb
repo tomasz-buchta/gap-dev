@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :panel_provider do
-    code { "times_a" }
+    sequence(:code) { |n| "code-#{n}" }
   end
 end

@@ -3,4 +3,8 @@ class TargetGroup < ApplicationRecord
   belongs_to :panel_provider
 
   has_and_belongs_to_many :countries
+
+  def root?
+    parent_id.nil?
+  end
 end
