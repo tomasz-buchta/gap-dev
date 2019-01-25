@@ -10,8 +10,4 @@ class TargetGroup < ApplicationRecord
   validates :external_id, presence: true, uniqueness: true
   validates :secret_code, presence: true
   validates :parent, parent: true
-
-  def root?
-    parent_id.nil?
-  end
 end
