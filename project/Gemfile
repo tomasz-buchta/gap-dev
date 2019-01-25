@@ -32,6 +32,8 @@ gem "jbuilder", "~> 2.5"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
+# For tree structure
+gem "closure_tree"
 
 # IoC container and DI
 gem "dry-system"
