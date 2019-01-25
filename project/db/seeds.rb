@@ -66,25 +66,43 @@ panel_providers
   )
 end
 
-TARGET_GROUPS = [
-  { name: "Tenis players" },
-  { name: "Football players" },
-  { name: "Hockey players" },
-  { name: "Archers" },
-  { name: "Martial arts practitioners" },
-  { name: "Runners" },
-  { name: "Volleyball players" }
-].freeze
-
 # TODO: Provide more meaningful names
 # I'm too lazy to provide some meaningful names right now
+# TODO: Dry it up
 
 (1..4).to_a.zip(countries, panel_providers) do |i, country, panel_provider|
-  TargetGroup.create!(
+  root = TargetGroup.create!(
     panel_provider: panel_provider,
     countries: [country],
     name: "a#{i}",
     external_id: SecureRandom.uuid,
     secret_code: SecureRandom.hex(64)
   )
+  3.times do |j|
+    tier1 = TargetGroup.create!(
+      parent: root,
+      panel_provider: panel_provider,
+      name: "b#{j}",
+      external_id: SecureRandom.uuid,
+      secret_code: SecureRandom.hex(64)
+    )
+    3.times do |k|
+      tier2 = TargetGroup.create!(
+        parent: tier1,
+        panel_provider: panel_provider,
+        name: "c#{k}",
+        external_id: SecureRandom.uuid,
+        secret_code: SecureRandom.hex(64)
+      )
+      3.times do |l|
+        tier2 = TargetGroup.create!(
+          parent: tier2,
+          panel_provider: panel_provider,
+          name: "d#{l}",
+          external_id: SecureRandom.uuid,
+          secret_code: SecureRandom.hex(64)
+        )
+      end
+    end
+  end
 end
