@@ -29,16 +29,6 @@ LOCATIONS = [
   { name: "Seattle" }
 ].freeze
 
-[
-  { secret_code: "AAA111", name: "Tenis players" },
-  { secret_code: "AAA112", name: "Football players" },
-  { secret_code: "AAA113", name: "Hockey players" },
-  { secret_code: "AAA114", name: "Archers" },
-  { secret_code: "AAA115", name: "Martial arts practitioners" },
-  { secret_code: "AAA116", name: "Runners" },
-  { secret_code: "AAA117", name: "Volleyball players" }
-]
-
 PANEL_PROVIDERS_CODES.each { |panel_provider_code| PanelProvider.create!(code: panel_provider_code) }
 
 panel_providers = PanelProvider.all.to_a << PanelProvider.last
@@ -73,5 +63,28 @@ panel_providers
     panel_provider: panel_provider,
     country: country,
     name: location_group[:name]
+  )
+end
+
+TARGET_GROUPS = [
+  { name: "Tenis players" },
+  { name: "Football players" },
+  { name: "Hockey players" },
+  { name: "Archers" },
+  { name: "Martial arts practitioners" },
+  { name: "Runners" },
+  { name: "Volleyball players" }
+].freeze
+
+# TODO: Provide more meaningful names
+# I'm too lazy to provide some meaningful names right now
+
+(1..4).to_a.zip(countries, panel_providers) do |i, country, panel_provider|
+  TargetGroup.create!(
+    panel_provider: panel_provider,
+    countries: [country],
+    name: "a#{i}",
+    external_id: SecureRandom.uuid,
+    secret_code: SecureRandom.hex(64)
   )
 end
