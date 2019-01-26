@@ -93,6 +93,10 @@ GEM
       dry-container (~> 0.2, >= 0.2.6)
       dry-core (~> 0.2)
       dry-equalizer (~> 0.2)
+    dry-monads (1.2.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.4, >= 0.4.4)
+      dry-equalizer
     dry-struct (0.6.0)
       dry-core (~> 0.4, >= 0.4.3)
       dry-equalizer (~> 0.2)
@@ -265,6 +269,7 @@ DEPENDENCIES
   closure_tree
   coffee-rails (~> 4.2)
   database_cleaner
+  dry-monads
   dry-system
   factory_bot_rails
   jbuilder (~> 2.5)

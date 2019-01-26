@@ -8,6 +8,7 @@ class AppContainer < Dry::System::Container
   end
 
   load_paths!("services")
+  load_paths!("repositories")
 end
 
 AppImport = AppContainer.injector
