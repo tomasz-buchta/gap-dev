@@ -82,7 +82,7 @@ end
     tier1 = TargetGroup.create!(
       parent: root,
       panel_provider: panel_provider,
-      name: "b#{j}",
+      name: "b#{i}-#{j}",
       external_id: SecureRandom.uuid,
       secret_code: SecureRandom.hex(64)
     )
@@ -90,7 +90,7 @@ end
       tier2 = TargetGroup.create!(
         parent: tier1,
         panel_provider: panel_provider,
-        name: "c#{k}",
+        name: "c#{i}-#{j}-#{k}",
         external_id: SecureRandom.uuid,
         secret_code: SecureRandom.hex(64)
       )
@@ -98,7 +98,7 @@ end
         tier2 = TargetGroup.create!(
           parent: tier2,
           panel_provider: panel_provider,
-          name: "d#{l}",
+          name: "d#{i}-#{j}-#{k}-#{l}",
           external_id: SecureRandom.uuid,
           secret_code: SecureRandom.hex(64)
         )
