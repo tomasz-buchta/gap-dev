@@ -9,6 +9,6 @@ describe PricingStrategies::TimesAPricingStrategy do
       end
     end
     it { is_expected.to be_a_success }
-    it { expect(subject.value!).to eq(734) }
+    it { expect(subject.value!).to eq(7.34) }
   end
 end

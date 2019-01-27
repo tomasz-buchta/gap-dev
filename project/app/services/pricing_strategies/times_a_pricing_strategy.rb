@@ -10,7 +10,7 @@ module PricingStrategies
     def call
       response = HTTParty.get(URL)
       if response.success?
-        Success(Nokogiri::HTML(response).text.count(CHARACTER_TO_COUNT))
+        Success(Nokogiri::HTML(response).text.count(CHARACTER_TO_COUNT).to_f / 100)
       else
         Failure("Cannot fetch #{URL}")
       end
