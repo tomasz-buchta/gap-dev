@@ -1,0 +1,3 @@
+class TimesHtmlPricingStrategy
+
+end

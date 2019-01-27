@@ -1,0 +1,3 @@
+class TimesAPricingStrategy
+
+end
