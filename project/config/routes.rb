@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :private do
         resources :locations, param: :country_code, only: [:show]
+        resources :target_groups, param: :country_code, only: [:show]
       end
     end
   end
