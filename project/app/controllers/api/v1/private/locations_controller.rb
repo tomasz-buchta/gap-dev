@@ -9,7 +9,13 @@ module Api
             location_repository
             .locations_by_country_code(params[:country_code])
             .value_or []
-          render json: result
+          render json: serializer.new(result).serialized_json
+        end
+
+        private
+
+        def serializer
+          ::Private::LocationSerializer
         end
       end
     end

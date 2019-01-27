@@ -9,7 +9,13 @@ module Api
             target_group_repository
             .by_country_code(params[:country_code])
             .value_or []
-          render json: result
+          render json: serializer.new(result).serialized_json
+        end
+
+        private
+
+        def serializer
+          ::Private::TargetGroupSerializer
         end
       end
     end
