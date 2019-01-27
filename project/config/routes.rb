@@ -10,6 +10,10 @@ Rails.application.routes.draw do
         resources :target_groups, param: :country_code, only: [:show]
         resources :target_evaluation, only: [:create]
       end
+      namespace :public do
+        resources :locations, param: :country_code, only: [:show]
+        resources :target_groups, param: :country_code, only: [:show]
+      end
     end
   end
 end

@@ -1,10 +1,10 @@
 module Api
   module V1
-    module Private
+    module Public
       class LocationsController < ApplicationController
         include AppImport[
           "location_repository",
-          "serializers.private.location_serializer"
+          "serializers.public.location_serializer"
         ]
 
         def show
