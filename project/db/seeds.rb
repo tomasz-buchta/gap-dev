@@ -6,6 +6,13 @@ COUNTRIES = [
   { code: "UK", panel_provider_code: "times_html" }
 ].freeze
 
+LOCATION_GROUPS = [
+  { name: "The West" },
+  { name: "The South" },
+  { name: "The Midwest" },
+  { name: "The Norht-East" }
+].freeze
+
 LOCATIONS = [
   { name: "New York" },
   { name: "Los Angeles" },
@@ -42,28 +49,25 @@ end
 
 countries = Country.all.to_a << Country.last
 
-LOCATIONS.each do |location|
-  Location.create!(
-    name: location.fetch(:name),
-    external_id: SecureRandom.uuid,
-    secret_code: SecureRandom.hex(64)
-  )
-end
-
-LOCATION_GROUPS = [
-  { name: "The West" },
-  { name: "The South" },
-  { name: "The Midwest" },
-  { name: "The Norht-East" }
-].freeze
-
-panel_providers
-  .zip(countries, LOCATION_GROUPS) do |panel_provider, country, location_group|
+location_groups =
+  panel_providers
+  .zip(countries, LOCATION_GROUPS).map do |panel_provider, country, location_group|
   LocationGroup.create!(
     panel_provider: panel_provider,
     country: country,
     name: location_group[:name]
   )
+end
+
+LOCATIONS.in_groups(location_groups.count).zip(location_groups) do |locations, location_group|
+  locations.each do |location|
+    Location.create!(
+      location_group: location_group,
+      name: location.fetch(:name),
+      external_id: SecureRandom.uuid,
+      secret_code: SecureRandom.hex(64)
+    )
+  end
 end
 
 # TODO: Provide more meaningful names
