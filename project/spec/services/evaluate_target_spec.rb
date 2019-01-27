@@ -27,7 +27,9 @@ describe EvaluateTarget do
       "pricing_strategy_factory",
       instance_double(
         PricingStrategyFactory,
-        from_provider: Success(instance_double(TimesAPricingStrategy, call: Success(54.33)))
+        from_provider: Success(
+          instance_double(PricingStrategies::TimesAPricingStrategy, call: Success(54.33))
+        )
       )
     )
   end
