@@ -5,7 +5,7 @@ class PricingStrategyFactory
   PANEL_PROVIDER_10_ARRAYS_CODE  = "10_arrays".freeze
   PANEL_PROVIDER_TIMES_HTML_CODE = "times_html".freeze
 
-  def map_provider_to_strategies(provider)
+  def from_provider(provider)
     case provider.code
     when PANEL_PROVIDER_TIMES_A_CODE
       times_a_pricing_strategy
