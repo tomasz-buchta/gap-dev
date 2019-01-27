@@ -1,18 +1,17 @@
-class Api::V1::Private::TargetEvaluationController < ApplicationController
-  def create
-    validate_params(input)
+module Api
+  module V1
+    module Private
+      class TargetEvaluationController < ApplicationController
+        include AppImport["evaluate_target"]
 
-  end
-
-  private
-
-  def validate_params(input)
-    schema = Dry::Validation.Params do
-      required(:country_code)
-      required(:target_group_id)
-      required(:location).schema do
-        required(:id)
-        required(:panel_size)
+        def create
+          result = evaluate_target.call(params.to_unsafe_hash)
+          if result.success?
+            render json: result.value!
+          else
+            render json: { error: "Something went wrong", message: result.failure }
+          end
+        end
       end
     end
   end

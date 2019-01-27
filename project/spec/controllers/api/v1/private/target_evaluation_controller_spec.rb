@@ -11,14 +11,17 @@ RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller d
 
   let(:setup_stubs) do
     AppContainer.stub(
-      "location_repository",
-      instance_double(LocationRepository, locations_by_country_code: Success([]))
+      "evaluate_target",
+      instance_double(
+        EvaluateTarget,
+        call: Success(locations: [{ id: 123, panel_size: 200, price: 768.33 }])
+      )
     )
   end
 
-  describe "GET #show" do
+  describe "POST #create" do
     before do
-      post :create, params: {
+      post :create, body: {
         country_code: "PL",
         target_group_id: 1,
         locations: [
@@ -28,5 +31,4 @@ RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller d
     end
     it { expect(response.status).to eq(200) }
   end
-
 end
