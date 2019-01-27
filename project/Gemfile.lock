@@ -134,6 +134,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -296,6 +298,7 @@ DEPENDENCIES
   dry-system
   dry-validation
   factory_bot_rails
+  fast_jsonapi
   httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
