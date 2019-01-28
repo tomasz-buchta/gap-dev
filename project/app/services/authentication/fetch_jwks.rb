@@ -1,7 +1,7 @@
 module Authentication
   class FetchJwks
     def call
-      jwks_raw = HTTParty.get(URI("https://gap-dev-test.eu.auth0.com/.well-known/jwks.json")).body
+      jwks_raw = HTTParty.get(URI(Rails.application.credentials.auth0_jwks_url)).body
       jwks_keys = Array(JSON.parse(jwks_raw)["keys"])
       Hash[
         jwks_keys
