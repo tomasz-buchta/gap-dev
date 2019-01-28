@@ -1,3 +1,5 @@
+require "dry/matcher/result_matcher"
+
 module Api
   module V1
     module Private
@@ -5,11 +7,13 @@ module Api
         include AppImport["evaluate_target"]
 
         def create
-          result = evaluate_target.call(params.to_unsafe_hash)
-          if result.success?
-            render json: result.value!
-          else
-            render json: { message: "Something went wrong", errors: result.failure }
+          Dry::Matcher::ResultMatcher.call(evaluate_target.call(params.to_unsafe_hash)) do |m|
+            m.success do |result|
+              render json: result
+            end
+            m.failure do |message|
+              render status: 400, json: { message: "Something went wrong", errors: message }
+            end
           end
         end
       end
