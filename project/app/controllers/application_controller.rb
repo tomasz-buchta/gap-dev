@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   private
 
   def unauthorized(message)
-    render json: { message: "Not authorized", error: message }
+    render status: 403, json: { message: "Not authorized", error: message }
   end
 end
