@@ -1,7 +1,7 @@
 module Api
   module V1
     module Private
-      class TargetEvaluationController < ApplicationController
+      class TargetEvaluationController < BaseController
         include AppImport["evaluate_target"]
 
         def create
@@ -9,7 +9,7 @@ module Api
           if result.success?
             render json: result.value!
           else
-            render json: { error: "Something went wrong", message: result.failure }
+            render json: { message: "Something went wrong", errors: result.failure }
           end
         end
       end

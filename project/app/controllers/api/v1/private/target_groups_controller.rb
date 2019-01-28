@@ -1,7 +1,7 @@
 module Api
   module V1
     module Private
-      class TargetGroupsController < ApplicationController
+      class TargetGroupsController < BaseController
         include AppImport[
           "target_group_repository",
           "serializers.private.target_group_serializer"

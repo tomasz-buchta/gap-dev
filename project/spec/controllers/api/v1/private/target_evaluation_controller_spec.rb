@@ -4,12 +4,19 @@ require "dry/monads/result"
 RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller do
   include Dry::Monads::Result::Mixin
 
+  include_examples "authentication"
+
   before do
     setup_stubs
     @controller = described_class.new
   end
 
   let(:setup_stubs) do
+    authenticate_request
+    stub_evaluate_target
+  end
+
+  let(:stub_evaluate_target) do
     AppContainer.stub(
       "evaluate_target",
       instance_double(
@@ -29,6 +36,8 @@ RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller d
         ]
       }
     end
+
+    it_behaves_like "private endpoint"
     it { expect(response.status).to eq(200) }
   end
 end
