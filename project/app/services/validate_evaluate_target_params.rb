@@ -2,12 +2,12 @@ class ValidateEvaluateTargetParams
   Dry::Validation.load_extensions(:monads)
 
   SCHEMA = Dry::Validation.Params do
-    required(:country_code).filled
-    required(:target_group_id).filled
+    required(:country_code).filled(:str?)
+    required(:target_group_id).filled(:int?)
     required(:locations).each do
       schema do
-        required(:id).filled
-        required(:panel_size).filled
+        required(:id).filled(:int?)
+        required(:panel_size).filled(:int?)
       end
     end
   end

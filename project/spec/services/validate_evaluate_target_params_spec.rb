@@ -25,6 +25,23 @@ describe ValidateEvaluateTargetParams do
           target_group_id: ["is missing"]
         )
       end
+      context "invalid param types" do
+        let(:params) do
+          {
+            country_code: 1,
+            target_group_id: "1",
+            locations: [
+              { id: "duck", panel_size: "duck_xxl" }
+            ]
+          }
+        end
+        it "contains error messages" do
+          expect(subject.failure).to eq(
+            country_code: ["must be a string"],
+            locations: { 0 => { id: ["must be an integer"], panel_size: ["must be an integer"] } },
+          )
+        end
+      end
     end
   end
 end
