@@ -1,7 +1,7 @@
 module Api
   module V1
     module Private
-      class TargetEvaluationController < ApplicationController
+      class TargetEvaluationController < BaseController
         include AppImport["evaluate_target"]
 
         def create
