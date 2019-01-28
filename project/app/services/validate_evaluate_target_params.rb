@@ -17,7 +17,7 @@ class ValidateEvaluateTargetParams
     if result.success?
       Success(result)
     else
-      Failure(step: :validate, errors: result.errors)
+      Failure([:validation_failed, result.errors])
     end
   end
 end

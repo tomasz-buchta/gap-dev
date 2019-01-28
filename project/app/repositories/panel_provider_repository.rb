@@ -9,6 +9,6 @@ class PanelProviderRepository
       .joins(:countries)
       .where(countries: { code: country_code })
       .first
-    record.nil? ? Failure(:provider_not_found) : Success(record)
+    record.nil? ? Failure(type: :not_found, errors: ["Provider not found"]) : Success(record)
   end
 end
