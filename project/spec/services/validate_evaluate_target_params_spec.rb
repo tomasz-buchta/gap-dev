@@ -15,11 +15,12 @@ describe ValidateEvaluateTargetParams do
 
     it { is_expected.to be_a(Dry::Monads::Result) }
     it { is_expected.to be_a_success }
+
     context "with invalid params" do
       let(:params) { {} }
       it { is_expected.to be_a_failure }
       it "contains error messages" do
-        expect(subject.failure).to eq(
+        expect(subject.failure[:errors]).to eq(
           country_code: ["is missing"],
           locations: ["is missing"],
           target_group_id: ["is missing"]
@@ -36,9 +37,9 @@ describe ValidateEvaluateTargetParams do
           }
         end
         it "contains error messages" do
-          expect(subject.failure).to eq(
+          expect(subject.failure[:errors]).to eq(
             country_code: ["must be a string"],
-            locations: { 0 => { id: ["must be an integer"], panel_size: ["must be an integer"] } },
+            locations: { 0 => { id: ["must be an integer"], panel_size: ["must be an integer"] } }
           )
         end
       end

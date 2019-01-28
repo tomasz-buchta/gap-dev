@@ -1,5 +1,5 @@
 class ValidateEvaluateTargetParams
-  Dry::Validation.load_extensions(:monads)
+  include Dry::Monads::Result::Mixin
 
   SCHEMA = Dry::Validation.Params do
     required(:country_code).filled(:str?)
@@ -13,6 +13,11 @@ class ValidateEvaluateTargetParams
   end
 
   def call(input)
-    SCHEMA.call(input).to_monad
+    result = SCHEMA.call(input)
+    if result.success?
+      Success(result)
+    else
+      Failure(step: :validate, errors: result.errors)
+    end
   end
 end

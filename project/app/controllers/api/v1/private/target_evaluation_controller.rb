@@ -11,8 +11,11 @@ module Api
             m.success do |result|
               render json: result
             end
-            m.failure do |message|
-              render status: 400, json: { message: "Something went wrong", errors: message }
+            m.failure :validate do |messages|
+              render status: 400, json: { message: "Invalid params", errors: messages }
+            end
+            m.failure :not_found do |message|
+              render status: 500, json: { message: "Something went wrong", errors: message }
             end
           end
         end
