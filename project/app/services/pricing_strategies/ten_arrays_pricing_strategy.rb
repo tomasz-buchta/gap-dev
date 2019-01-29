@@ -12,7 +12,7 @@ module PricingStrategies
         parsed_content = JSON(response)
         Success(arrays_count(parsed_content).to_f / 10)
       else
-        Failure("Failed to fetch #{URL}")
+        Failure(:external_error, ["Cannot fetch #{URL}"])
       end
     end
 

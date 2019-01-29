@@ -1,9 +1,10 @@
 module Api
   module V1
     module Private
-      class TargetGroupsController < BaseController
+      class TargetGroupsController < BasePrivateController
         include AppImport[
           "target_group_repository",
+          "result_matcher",
           "serializers.private.target_group_serializer"
         ]
 
@@ -11,8 +12,18 @@ module Api
           result =
             target_group_repository
             .by_country_code(params[:country_code])
-            .value_or []
-          render json: target_group_serializer.new(result).serialized_json
+
+          result_matcher.call(result) do |m|
+            m.success do |target_groups|
+              render json: target_group_serializer.new(target_groups).serialized_json
+            end
+            m.failure :not_found do |message|
+              render status: :not_found, json: { message: "Not found", errors: message }
+            end
+            m.failure do
+              render status: :internal_server_error, json: { message: "Something went wrong", errors: message }
+            end
+          end
         end
       end
     end

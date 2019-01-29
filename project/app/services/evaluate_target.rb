@@ -7,14 +7,14 @@ class EvaluateTarget
 
   include AppImport[
     "validate_evaluate_target_params",
-    "panel_provider_repository",
+    "country_repository",
     "pricing_strategy_factory"
   ]
 
   def call(input)
     valid_params = yield validate_evaluate_target_params.call(input)
-    panel_provider = yield panel_provider_repository.for_country_code(valid_params[:country_code])
-    pricing_strategy = yield pricing_strategy_factory.from_provider(panel_provider)
+    country = yield country_repository.by_country_code(valid_params[:country_code])
+    pricing_strategy = yield pricing_strategy_factory.from_provider(country.panel_provider)
     unit_price = yield pricing_strategy.call
     Success(calculate_location_prices(valid_params[:locations], unit_price))
   end

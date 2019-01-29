@@ -39,5 +39,35 @@ RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller d
 
     it_behaves_like "private endpoint"
     it { expect(response.status).to eq(200) }
+
+    context "Invalid params" do
+      let(:stub_evaluate_target) do
+        AppContainer.stub(
+          "evaluate_target",
+          instance_double(
+            EvaluateTarget,
+            call: Failure([:validation_failed, [locations: ["missing"]]])
+          )
+        )
+      end
+      it { expect(response.status).to eq(400) }
+    end
+
+    context "Not found" do
+      let(:stub_evaluate_target) do
+        AppContainer.stub(
+          "evaluate_target",
+          instance_double(
+            EvaluateTarget,
+            call: Failure([:not_found, "Country not found"])
+          )
+        )
+      end
+      it { expect(response.status).to eq(404) }
+      it "renders error" do
+        json_body = JSON(response.body)
+        expect(json_body["errors"]).to include "Country not found"
+      end
+    end
   end
 end
