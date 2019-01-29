@@ -7,11 +7,8 @@ class TargetGroupRepository
 
   include AppImport["country_repository"]
 
-  # Warning this will execute 1 + n queries where n = root TargetGroups of country
-  # FIXME: Remove n + 1 queries problem
-  # TODO: Return tree like structure from here
   def by_country_code(country_code)
     country = yield country_repository.by_country_code(country_code)
-    Success(country.target_groups.collect(&:self_and_descendants).flatten)
+    Success(country.target_groups.joins(:self_and_descendants))
   end
 end
