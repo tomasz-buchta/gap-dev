@@ -1,4 +1,5 @@
 require "dry/monads/result"
+require "dry/monads/do"
 
 class TargetGroupRepository
   include Dry::Monads::Result::Mixin
