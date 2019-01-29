@@ -13,10 +13,8 @@ class AppContainer < Dry::System::Container
   load_paths!("factories")
   load_paths!("matchers")
 
-  register("serializers.private.location_serializer") { Private::LocationSerializer }
-  register("serializers.private.target_group_serializer") { Private::TargetGroupSerializer }
-  register("serializers.public.location_serializer") { Public::LocationSerializer }
-  register("serializers.public.target_group_serializer") { Public::TargetGroupSerializer }
+  register("serializers.location_serializer") { LocationSerializer }
+  register("serializers.target_group_serializer") { TargetGroupSerializer }
   register("result_matcher") { ResultMatcher }
 end
 

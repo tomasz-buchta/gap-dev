@@ -4,7 +4,7 @@ module Api
       class LocationsController < BasePrivateController
         include AppImport[
           "location_repository",
-          "serializers.private.location_serializer"
+          "serializers.location_serializer"
         ]
 
         def show
@@ -12,7 +12,7 @@ module Api
             location_repository
             .locations_by_country_code(params[:country_code])
             .value_or []
-          render json: location_serializer.new(result).serialized_json
+          render json: location_serializer.new(result, params: { private: true }).serialized_json
         end
       end
     end

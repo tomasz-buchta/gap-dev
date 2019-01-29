@@ -4,7 +4,7 @@ module Api
       class LocationsController < ApplicationController
         include AppImport[
           "location_repository",
-          "serializers.public.location_serializer"
+          "serializers.location_serializer"
         ]
 
         def show

@@ -4,7 +4,7 @@ module Api
       class TargetGroupsController < ApplicationController
         include AppImport[
           "target_group_repository",
-          "serializers.public.target_group_serializer"
+          "serializers.target_group_serializer"
         ]
 
         def show
