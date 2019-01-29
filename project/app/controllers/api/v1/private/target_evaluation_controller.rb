@@ -1,7 +1,7 @@
 module Api
   module V1
     module Private
-      class TargetEvaluationController < BaseController
+      class TargetEvaluationController < BasePrivateController
         include AppImport["evaluate_target"]
         include AppImport["result_matcher"]
 

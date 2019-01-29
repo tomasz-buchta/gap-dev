@@ -1,7 +1,7 @@
 module Api
   module V1
     module Private
-      class LocationsController < BaseController
+      class LocationsController < BasePrivateController
         include AppImport[
           "location_repository",
           "serializers.private.location_serializer"
