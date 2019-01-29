@@ -26,7 +26,7 @@ module Api
         private
 
         def matcher
-          m = Dry::Matcher.new(
+          Dry::Matcher.new(
             success: Dry::Matcher::Case.new(
               match: ->(result) { result.success? },
               resolve: ->(result) { result.value! }
@@ -39,7 +39,7 @@ module Api
                   result.failure?
                 end
               },
-              resolve: ->(result) { result.failure }
+              resolve: ->(result) { result.failure.last }
             )
           )
         end

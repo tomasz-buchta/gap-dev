@@ -12,7 +12,7 @@ module PricingStrategies
       if response.success?
         Success(Nokogiri::HTML(response).text.count(CHARACTER_TO_COUNT).to_f / 100)
       else
-        Failure("Cannot fetch #{URL}")
+        Failure(:external_error, ["Cannot fetch #{URL}"])
       end
     end
   end

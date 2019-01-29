@@ -8,6 +8,6 @@ class CountryRepository
       Country
       .joins(:panel_provider)
       .find_by(code: country_code)
-    record.nil? ? Failure([:not_found, "Country not found"]) : Success(record)
+    record.nil? ? Failure([:not_found, ["Country not found"]]) : Success(record)
   end
 end
