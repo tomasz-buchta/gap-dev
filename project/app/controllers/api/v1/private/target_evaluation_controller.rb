@@ -2,8 +2,10 @@ module Api
   module V1
     module Private
       class TargetEvaluationController < BasePrivateController
-        include AppImport["evaluate_target"]
-        include AppImport["result_matcher"]
+        include AppImport[
+          "evaluate_target",
+          "result_matcher"
+        ]
 
         def create
           result_matcher.call(evaluate_target.call(params.to_unsafe_hash)) do |m|
