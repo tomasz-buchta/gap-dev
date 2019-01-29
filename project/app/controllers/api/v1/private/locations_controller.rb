@@ -16,7 +16,9 @@ module Api
             .locations_by_country_code(params[:country_code])
 
           match_result_to_response(result, result_matcher) do |locations|
-            render json: location_serializer.new(locations, params: { private: true }).serialized_json
+            render json: location_serializer
+              .new(locations, params: { private: true })
+              .serialized_json
           end
         end
       end

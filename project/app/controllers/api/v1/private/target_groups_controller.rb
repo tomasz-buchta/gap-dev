@@ -16,7 +16,9 @@ module Api
             .by_country_code(params[:country_code])
 
           match_result_to_response(result, result_matcher) do |target_groups|
-            render json: target_group_serializer.new(target_groups, params: { private: true }).serialized_json
+            render json: target_group_serializer
+              .new(target_groups, params: { private: true })
+              .serialized_json
           end
         end
       end
