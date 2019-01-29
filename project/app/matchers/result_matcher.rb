@@ -4,7 +4,7 @@ ResultMatcher = Dry::Matcher.new(
     resolve: ->(result) { result.value! }
   ),
   failure: Dry::Matcher::Case.new(
-    match: ->(result, failure_type = nil) {
+    match: lambda { |result, failure_type = nil|
       if failure_type
         result.failure? && result.failure.first == failure_type
       else

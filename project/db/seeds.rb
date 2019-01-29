@@ -52,12 +52,12 @@ countries = Country.all.to_a << Country.last
 location_groups =
   panel_providers
   .zip(countries, LOCATION_GROUPS).map do |panel_provider, country, location_group|
-  LocationGroup.create!(
-    panel_provider: panel_provider,
-    country: country,
-    name: location_group[:name]
-  )
-end
+    LocationGroup.create!(
+      panel_provider: panel_provider,
+      country: country,
+      name: location_group[:name]
+    )
+  end
 
 LOCATIONS.in_groups(location_groups.count).zip(location_groups) do |locations, location_group|
   locations.each do |location|

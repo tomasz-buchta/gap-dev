@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::V1::Public::LocationsController, type: :controller do
   include Dry::Monads::Result::Mixin
@@ -28,5 +28,4 @@ RSpec.describe Api::V1::Public::LocationsController, type: :controller do
       expect(json_body["data"].first["attributes"]["name"]).to eq("DuckVille")
     end
   end
-
 end

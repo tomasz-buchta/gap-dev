@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::V1::Public::TargetGroupsController, type: :controller do
   include Dry::Monads::Result::Mixin

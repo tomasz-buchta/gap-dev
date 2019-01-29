@@ -6,11 +6,11 @@ class CreateTargetGroupHierarchies < ActiveRecord::Migration[5.2]
       t.integer :generations, null: false
     end
 
-    add_index :target_group_hierarchies, [:ancestor_id, :descendant_id, :generations],
-      unique: true,
-      name: "target_group_anc_desc_idx"
+    add_index :target_group_hierarchies, %i[ancestor_id descendant_id generations],
+              unique: true,
+              name: "target_group_anc_desc_idx"
 
     add_index :target_group_hierarchies, [:descendant_id],
-      name: "target_group_desc_idx"
+              name: "target_group_desc_idx"
   end
 end
