@@ -1,5 +1,4 @@
 require "dry/system/container"
-require_relative "../../matchers/result_matcher"
 
 class AppContainer < Dry::System::Container
   configure do |config|
