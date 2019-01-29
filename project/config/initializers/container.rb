@@ -4,7 +4,7 @@ class AppContainer < Dry::System::Container
   configure do |config|
     config.root = (Pathname.pwd + "app")
 
-    config.auto_register = %w[services]
+    config.auto_register = %w[services repositories factories matchers]
   end
 
   load_paths!("services")
