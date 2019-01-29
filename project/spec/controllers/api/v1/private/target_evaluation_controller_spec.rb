@@ -59,11 +59,15 @@ RSpec.describe Api::V1::Private::TargetEvaluationController, type: :controller d
           "evaluate_target",
           instance_double(
             EvaluateTarget,
-            call: Failure([:not_found, "Provider not found"])
+            call: Failure([:not_found, "Country not found"])
           )
         )
       end
       it { expect(response.status).to eq(404) }
+      it "renders error" do
+        json_body = JSON(response.body)
+        expect(json_body["errors"]).to include "Country not found"
+      end
     end
   end
 end

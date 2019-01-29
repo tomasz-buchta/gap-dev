@@ -20,8 +20,8 @@ describe EvaluateTarget do
       double(call: Success(params))
     )
     AppContainer.stub(
-      "panel_provider_repository",
-      instance_double(PanelProviderRepository, for_country_code: Success(panel_provider))
+      "country_repository",
+      instance_double(CountryRepository, by_country_code: Success(build_stubbed(:country)))
     )
     AppContainer.stub(
       "pricing_strategy_factory",
