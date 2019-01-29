@@ -28,3 +28,7 @@ curl --request GET \
   --url http://localhost:3000/api/v1/private \
   --header 'authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
+
+## Master key
+
+The credentials are encrypted you need to obtain the master key and put it in `config/master.key`, do not commit this file
